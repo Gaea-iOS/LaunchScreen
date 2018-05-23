@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'LaunchScreen_Example' do
+  pod 'LaunchScreen', :path => '../'
+
+  target 'LaunchScreen_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
