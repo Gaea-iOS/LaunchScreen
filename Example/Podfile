@@ -2,10 +2,11 @@ use_frameworks!
 
 target 'LaunchScreen_Example' do
   pod 'LaunchScreen', :path => '../'
+  pod 'Kingfisher'
 
   target 'LaunchScreen_Tests' do
     inherit! :search_paths
-
+    
     
   end
 end

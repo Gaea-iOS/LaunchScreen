@@ -1,0 +1,23 @@
+PODS:
+  - Kingfisher (4.7.0)
+  - LaunchScreen (0.1.0)
+
+DEPENDENCIES:
+  - Kingfisher
+  - LaunchScreen (from `../`)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Kingfisher
+
+EXTERNAL SOURCES:
+  LaunchScreen:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Kingfisher: da6b005aa96d37698e3e4f1ccfe96a5b9bbf27d6
+  LaunchScreen: 819430384e5c9d49a3c220430fd5633a49606120
+
+PODFILE CHECKSUM: ecb9a4e65a7d08ba16a0971edaa2f4a8f2293f22
+
+COCOAPODS: 1.5.0

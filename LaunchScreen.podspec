@@ -30,8 +30,12 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'LaunchScreen/Classes/**/*'
+  s.source_files = 'LaunchScreen/Classes/**/*.{swift}'
   
+  s.resource_bundles = {
+      'LaunchScreen' => ['LaunchScreen/Classes/**/*.{storyboard,xib}']
+  }
+
   # s.resource_bundles = {
   #   'LaunchScreen' => ['LaunchScreen/Assets/*.png']
   # }
@@ -39,4 +43,5 @@ TODO: Add long description of the pod here.
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
+  s.dependency 'FoundationExtension',  :git => 'https://github.com/Gaea-iOS/FoundationExtension.git', :tag => '0.4.5'
 end
