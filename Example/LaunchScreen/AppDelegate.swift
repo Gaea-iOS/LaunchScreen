@@ -43,6 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("iApp.shared.isLatestVersion = \(iApp.shared.isLatestVersion)")
         
         LaunchImageManager.shared.storage = LaunchImageStorage()
+        LaunchImageManager.shared.sloganImage = UIImage()
         let launchImage = LaunchImage(imageURL: "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png", duration: 3, openURL: URL(string: "dadxxa://tickes/1"))
         LaunchImageManager.shared.showImage(launchImage: launchImage)
         
@@ -72,6 +73,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        
+        if userActivity.activityType == NSUserActivityTypeBrowsingWeb {
+            let url = userActivity.webpageURL
+            guard let host = url?.absoluteURL.host else { return true}
+            if host == "oia.saiday.com" {
+                
+            } else {
+                UIApplication.shared.openURL(url!)
+            }
+        }
+        return true
+    }
 
 }
 
