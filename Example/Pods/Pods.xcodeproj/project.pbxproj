@@ -13,8 +13,6 @@
 		103228D906B112AA75562E8B17179127 /* Indicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BAC26D78DB33794F9BC456BB1F3404 /* Indicator.swift */; };
 		114397DE4A2DC0204868A79F4BE13769 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11373FF82ED248D8BE23AE3AAA7840D6 /* Filter.swift */; };
 		1BF5272E20B66E2100ACACF3 /* UIViewController+UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5272D20B66E2100ACACF3 /* UIViewController+UIWindow.swift */; };
-		1BF5273020B6888600ACACF3 /* iApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5272F20B6888600ACACF3 /* iApp.swift */; };
-		1BF5273420B69BA500ACACF3 /* AppVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5273320B69BA500ACACF3 /* AppVersion.swift */; };
 		1BF5273620B6ABEF00ACACF3 /* DownCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5273520B6ABEF00ACACF3 /* DownCounter.swift */; };
 		1BF5273820B6AC0700ACACF3 /* WeakTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5273720B6AC0700ACACF3 /* WeakTimer.swift */; };
 		2283375C0C99789CF47EEDA0CE9D3D80 /* ImageProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71287AFAF7C48DDADA45D6AB921B36EF /* ImageProcessor.swift */; };
@@ -94,8 +92,6 @@
 		128DB806DD6DFCBE1553F52E23FB8B80 /* Pods-LaunchScreen_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LaunchScreen_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		17D10678DCDE585C27DF431ED1FC4FCF /* AnimatedImageView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AnimatedImageView.swift; path = Sources/AnimatedImageView.swift; sourceTree = "<group>"; };
 		1BF5272D20B66E2100ACACF3 /* UIViewController+UIWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+UIWindow.swift"; path = "LaunchScreen/Classes/UIViewController+UIWindow.swift"; sourceTree = "<group>"; };
-		1BF5272F20B6888600ACACF3 /* iApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = iApp.swift; path = LaunchScreen/Classes/iApp.swift; sourceTree = "<group>"; };
-		1BF5273320B69BA500ACACF3 /* AppVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppVersion.swift; path = LaunchScreen/Classes/AppVersion.swift; sourceTree = "<group>"; };
 		1BF5273520B6ABEF00ACACF3 /* DownCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DownCounter.swift; path = LaunchScreen/Classes/DownCounter.swift; sourceTree = "<group>"; };
 		1BF5273720B6AC0700ACACF3 /* WeakTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WeakTimer.swift; path = LaunchScreen/Classes/WeakTimer.swift; sourceTree = "<group>"; };
 		1D1AB57F53E7A8C9B43E7A7FCC1AA411 /* CacheSerializer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CacheSerializer.swift; path = Sources/CacheSerializer.swift; sourceTree = "<group>"; };
@@ -215,8 +211,6 @@
 				1BF5272D20B66E2100ACACF3 /* UIViewController+UIWindow.swift */,
 				544F3CB2F8B494CC69929D9CD41277AC /* LaunchImageManager.swift */,
 				E856B5D7CC9B37A8A20E458C18885365 /* LaunchScreen.swift */,
-				1BF5273320B69BA500ACACF3 /* AppVersion.swift */,
-				1BF5272F20B6888600ACACF3 /* iApp.swift */,
 				1BF5273520B6ABEF00ACACF3 /* DownCounter.swift */,
 				1BF5273720B6AC0700ACACF3 /* WeakTimer.swift */,
 				B851963B45931CED7AE6C2646CF59963 /* Pod */,
@@ -591,8 +585,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1BF5273420B69BA500ACACF3 /* AppVersion.swift in Sources */,
-				1BF5273020B6888600ACACF3 /* iApp.swift in Sources */,
 				1BF5273620B6ABEF00ACACF3 /* DownCounter.swift in Sources */,
 				1BF5273820B6AC0700ACACF3 /* WeakTimer.swift in Sources */,
 				1BF5272E20B66E2100ACACF3 /* UIViewController+UIWindow.swift in Sources */,

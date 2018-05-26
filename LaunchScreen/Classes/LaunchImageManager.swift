@@ -51,7 +51,7 @@ public class LaunchImageManager {
     public var sloganImage: UIImage? 
     
     public var storage: LaunchImageStorageType?
-    
+
     private let lastCachedLaunchImageStoreKey = "LaunchImage_LastCached"
     private var lastCachedLaunchImage: LaunchImage? {
         didSet {
@@ -67,10 +67,10 @@ public class LaunchImageManager {
         }
     }
     
-    public func showImage(launchImage: LaunchImage) {
+    public func showImage(launchImage: LaunchImage, openURLHandler: @escaping (URL) -> Bool) {
         guard let storage = storage else { return }
         if let image = storage.imageFromCache(withURL: launchImage.imageURL) {
-            showLaunchScreen(image: image, duration: launchImage.duration, openURL: launchImage.openURL)
+            showLaunchScreen(image: image, duration: launchImage.duration, openURL: launchImage.openURL, openURLHandler: openURLHandler)
         } else  {
             storage.downloadImageAndCached(withURL: launchImage.imageURL, completed: { [weak self] isSuccess in
                 guard isSuccess else { return }
@@ -78,16 +78,17 @@ public class LaunchImageManager {
             })
             if let lastCachedLaunchImage = lastCachedLaunchImage,
                 let image = storage.imageFromCache(withURL: lastCachedLaunchImage.imageURL) {
-                showLaunchScreen(image: image, duration: lastCachedLaunchImage.duration, openURL: lastCachedLaunchImage.openURL)
+                showLaunchScreen(image: image, duration: lastCachedLaunchImage.duration, openURL: lastCachedLaunchImage.openURL, openURLHandler: openURLHandler)
             }
         }
     }
     
-    private func showLaunchScreen(image: UIImage, duration: Int, openURL: URL?) {
+    private func showLaunchScreen(image: UIImage, duration: Int, openURL: URL?, openURLHandler: @escaping (URL) -> Bool) {
         guard duration > 0 else { return }
+        let launchImage = LaunchScreen.LaunchImage(sloganImage: sloganImage, image: image, duration: duration, openURL: openURL)
         let controller = LaunchScreen.initFromStoryboard()
-        controller.sloganImage = sloganImage
-        controller.launchImage = (image: image, duration: duration, openURL: openURL)
+        controller.launchImage = launchImage
+        controller.openURLHandler = openURLHandler
         controller.show()
     }
 }

@@ -10,12 +10,19 @@ import UIKit
 
 class LaunchScreen: UIViewController {
     
+    struct LaunchImage {
+        let sloganImage: UIImage?
+        let image: UIImage
+        let duration: Int
+        let openURL: URL?
+    }
+    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var sloganImageView: UIImageView!
     @IBOutlet weak var closeButton: UIButton!
     
-    var sloganImage: UIImage?
-    var launchImage: (image: UIImage, duration: Int, openURL: URL?)?
+    var launchImage: LaunchImage?
+    var openURLHandler: ((URL) -> Bool)?
     
     private var downCounter: DownCounter!
     
@@ -31,9 +38,10 @@ class LaunchScreen: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        sloganImageView.image = sloganImage
         
         guard let launchImage = launchImage else { return }
+        
+        sloganImageView.image = launchImage.sloganImage
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(tapOnImage(sender:)))
         imageView.addGestureRecognizer(tap)
@@ -58,19 +66,11 @@ class LaunchScreen: UIViewController {
     
     @objc private func tapOnImage(sender: Any) {
         
-        guard let openURL = launchImage?.openURL else { return }
+        guard let launchImage = launchImage, let openURL = launchImage.openURL, let openURLHandler = openURLHandler else { return }
         
         dismissInWindow()
         
-        if UIApplication.shared.canOpenURL(openURL) {
-            if #available(iOS 10.0, *) {
-                UIApplication.shared.open(openURL, options: [:], completionHandler: nil)
-            } else {
-                UIApplication.shared.openURL(openURL)
-            }
-        } else if !iApp.shared.isLatestVersion {
-            showAppUpdateAlertController()
-        }
+        _ = openURLHandler(openURL)
     }
     
     deinit {
@@ -79,16 +79,5 @@ class LaunchScreen: UIViewController {
     
     func show() {
         showInWindow()
-    }
-    
-    private func showAppUpdateAlertController() {
-        let controller = UIAlertController(title: "版本升级", message: "您使用的版本过低，无法跳转页面，请升级后再试。", preferredStyle: .alert)
-        let action1 = UIAlertAction(title: "暂时不升级", style: .cancel, handler: nil)
-        let action2 = UIAlertAction(title: "立马升级", style: .destructive) { _ in
-            iApp.shared.openAppStorePage()
-        }
-        controller.addAction(action1)
-        controller.addAction(action2)
-        present(controller, animated: true, completion: nil)
     }
 }

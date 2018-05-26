@@ -10,6 +10,7 @@ import UIKit
 import LaunchScreen
 import Kingfisher
 
+
 class LaunchImageStorage: LaunchImageStorageType {
     
     func downloadImageAndCached(withURL urlString: String, completed: @escaping (Bool) -> Void) {
@@ -24,12 +25,12 @@ class LaunchImageStorage: LaunchImageStorageType {
             completed(image != nil)
         }
     }
-
+    
     func imageFromCache(withURL urlString: String) -> UIImage? {
-        return ImageCache.default.retrieveImageInDiskCache(forKey: urlString) ?? ImageCache.default.retrieveImageInMemoryCache(forKey: urlString)
+        return ImageCache.default.retrieveImageInDiskCache(forKey: urlString) ??
+            ImageCache.default.retrieveImageInDiskCache(forKey:urlString)
     }
 }
-
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -40,13 +41,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        print("iApp.shared.isLatestVersion = \(iApp.shared.isLatestVersion)")
         
         LaunchImageManager.shared.storage = LaunchImageStorage()
         LaunchImageManager.shared.sloganImage = UIImage()
         let launchImage = LaunchImage(imageURL: "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png", duration: 3, openURL: URL(string: "dadxxa://tickes/1"))
-        LaunchImageManager.shared.showImage(launchImage: launchImage)
-        
+        LaunchImageManager.shared.showImage(launchImage: launchImage, openURLHandler: { url in
+            UIApplication.shared.openURL(url)
+        })
         
         return true
     }
