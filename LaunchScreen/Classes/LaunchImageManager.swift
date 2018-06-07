@@ -14,9 +14,9 @@ public protocol LaunchImageStorageType {
 }
 
 public struct LaunchImage {
-    var imageURL: String
-    var duration: Int
-    var openURL: URL?
+    public let imageURL: String
+    public let duration: Int
+    public let openURL: URL?
     
     public init(imageURL: String, duration: Int, openURL: URL?) {
         self.imageURL = imageURL
