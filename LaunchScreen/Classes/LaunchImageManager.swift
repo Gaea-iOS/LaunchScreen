@@ -67,10 +67,13 @@ public class LaunchImageManager {
         }
     }
     
-    public func showImage(launchImage: LaunchImage, openURLHandler: @escaping (URL) -> Bool) {
-        guard let storage = storage else { return }
+    /// 返回的LaunchImage是这一次启动时，真实显示的启动图信息。（参考方案，如果传进来的launchImage里面的图还没有在缓存中，则展示上次缓存的launchImage），所以真实显示的启动图信息可能是传进来的launchImage，也可能是上一次缓存的launchImage
+    public func showImage(launchImage: LaunchImage, openURLHandler: @escaping (URL) -> Bool) -> LaunchImage? {
+        guard let storage = storage else { return nil}
         if let image = storage.imageFromCache(withURL: launchImage.imageURL) {
-            showLaunchScreen(image: image, duration: launchImage.duration, openURL: launchImage.openURL, openURLHandler: openURLHandler)
+            let launchScreenImage = LaunchScreen.LaunchImage(sloganImage: sloganImage, image: image, duration: launchImage.duration, openURL: launchImage.openURL)
+            showLaunchScreen(launchImage: launchScreenImage, openURLHandler: openURLHandler)
+            return launchImage
         } else  {
             storage.downloadImageAndCached(withURL: launchImage.imageURL, completed: { [weak self] isSuccess in
                 guard isSuccess else { return }
@@ -78,14 +81,16 @@ public class LaunchImageManager {
             })
             if let lastCachedLaunchImage = lastCachedLaunchImage,
                 let image = storage.imageFromCache(withURL: lastCachedLaunchImage.imageURL) {
-                showLaunchScreen(image: image, duration: lastCachedLaunchImage.duration, openURL: lastCachedLaunchImage.openURL, openURLHandler: openURLHandler)
+                let launchScreenImage = LaunchScreen.LaunchImage(sloganImage: sloganImage, image: image, duration: lastCachedLaunchImage.duration, openURL: lastCachedLaunchImage.openURL)
+                showLaunchScreen(launchImage: launchScreenImage, openURLHandler: openURLHandler)
+                return lastCachedLaunchImage
             }
         }
+        return nil
     }
     
-    private func showLaunchScreen(image: UIImage, duration: Int, openURL: URL?, openURLHandler: @escaping (URL) -> Bool) {
-        guard duration > 0 else { return }
-        let launchImage = LaunchScreen.LaunchImage(sloganImage: sloganImage, image: image, duration: duration, openURL: openURL)
+    private func showLaunchScreen(launchImage: LaunchScreen.LaunchImage, openURLHandler: @escaping (URL) -> Bool) {
+        guard launchImage.duration > 0 else { return }
         let controller = LaunchScreen.initFromStoryboard()
         controller.launchImage = launchImage
         controller.openURLHandler = openURLHandler
