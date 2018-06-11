@@ -5,14 +5,13 @@
 //  Created by 王小涛 on 2018/5/22.
 //  Copyright © 2018年 王小涛. All rights reserved.
 //
-
 import UIKit
 
 class LaunchScreen: UIViewController {
     
     struct LaunchImage {
         let sloganImage: UIImage?
-        let image: UIImage
+        let image: UIImage?
         let duration: Int
         let openURL: URL?
     }
@@ -47,16 +46,18 @@ class LaunchScreen: UIViewController {
         imageView.addGestureRecognizer(tap)
         imageView.isUserInteractionEnabled = true
         imageView.image = launchImage.image
-        
+        closeButton.isHidden = launchImage.image == nil
         closeButton.setTitle("\(launchImage.duration) 跳过", for: .normal)
         
-        downCounter = DownCounter(step: 1, target: self)
-        downCounter.start(count: launchImage.duration)
-        downCounter.down = { [weak self] left in
-            self?.closeButton.setTitle("\(left) 跳过", for: .normal)
-        }
-        downCounter.done = { [weak self] in
-            self?.dismissInWindow()
+        if launchImage.duration > 0 {
+            downCounter = DownCounter(step: 1, target: self)
+            downCounter.start(count: launchImage.duration)
+            downCounter.down = { [weak self] left in
+                self?.closeButton.setTitle("\(left) 跳过", for: .normal)
+            }
+            downCounter.done = { [weak self] in
+                self?.dismissInWindow()
+            }
         }
     }
     

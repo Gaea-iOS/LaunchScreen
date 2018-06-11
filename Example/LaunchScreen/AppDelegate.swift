@@ -44,8 +44,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         LaunchImageManager.shared.storage = LaunchImageStorage()
         LaunchImageManager.shared.sloganImage = UIImage()
-        let launchImage = LaunchImage(imageURL: "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png", duration: 3, openURL: URL(string: "dadxxa://tickes/1"))
-        LaunchImageManager.shared.showImage(launchImage: launchImage, openURLHandler: { url in
+//        let launchImage = LaunchImage(imageURL: "https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png", duration: 3, openURL: URL(string: "dadxxa://tickes/1"))
+        LaunchImageManager.shared.showImage(launchImage: nil, openURLHandler: { url in
             UIApplication.shared.openURL(url)
         })
         

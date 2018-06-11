@@ -67,7 +67,12 @@ public class LaunchImageManager {
         }
     }
     
-    public func showImage(launchImage: LaunchImage, openURLHandler: @escaping (URL) -> Bool) {
+    public func showImage(launchImage: LaunchImage?, openURLHandler: @escaping (URL) -> Bool) {
+        guard let launchImage = launchImage else {
+            showLaunchScreen(image: nil, duration: 2, openURL: nil, openURLHandler: nil)
+            return
+        }
+        
         guard let storage = storage else { return }
         if let image = storage.imageFromCache(withURL: launchImage.imageURL) {
             showLaunchScreen(image: image, duration: launchImage.duration, openURL: launchImage.openURL, openURLHandler: openURLHandler)
@@ -83,7 +88,7 @@ public class LaunchImageManager {
         }
     }
     
-    private func showLaunchScreen(image: UIImage, duration: Int, openURL: URL?, openURLHandler: @escaping (URL) -> Bool) {
+    private func showLaunchScreen(image: UIImage?, duration: Int, openURL: URL?, openURLHandler: ((URL) -> Bool)?) {
         guard duration > 0 else { return }
         let launchImage = LaunchScreen.LaunchImage(sloganImage: sloganImage, image: image, duration: duration, openURL: openURL)
         let controller = LaunchScreen.initFromStoryboard()
